@@ -35,8 +35,7 @@ const router = createBrowserRouter([
 				path: "reports",
 				element: <PageReports />,
 			},
-			{
-				// MARKER::END_PAGE_ROUTES
+			/* MARKER::END_PAGE_ROUTES*/ {
 				path: "/",
 				element: <Navigate to="/welcome" replace />,
 			},

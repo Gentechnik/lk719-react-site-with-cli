@@ -24,14 +24,14 @@ export class PageManager {
 	public createPage() {
 		this.createPageFile();
 		this.addBlockToNavFile();
-		this.addBlockToMainFile();
+		this.addBlocksToMainFile();
 	}
 
 	private createPageFile() {
 		tools.createFile(
 			this.pathAndFileName,
 			`
-	export const Page${this.pageIdCode} = () => {
+	export const ${this.pageIdCode} = () => {
 		return (
 			<p>This is the ${this.pageIdCode} page.</p>
 		)
@@ -40,12 +40,24 @@ export class PageManager {
 		);
 	}
 
-	private addBlockToMainFile() {
-		const dynamicFile = new DynamicFile("src/components/Main.tsx");
+	private addBlocksToMainFile() {
+		const dynamicFile = new DynamicFile("src/main.tsx");
+
 		dynamicFile.addStringBlockBeforeMarker(
-			`MARKER::END_IMPORT_BLOCK`,
+			"MARKER::END_IMPORT_BLOCK",
 			`import { Page${this.idCode} } from './pages/Page${this.idCode}.tsx';`
 		);
+
+		dynamicFile.addStringBlockBeforeMarker(
+			"MARKER::END_PAGE_ROUTES",
+			`
+			{
+				path: "${this.idCode.toLowerCase()}",
+				element: <Page${this.idCode} />,
+			},
+		`
+		);
+
 		dynamicFile.save();
 	}
 
