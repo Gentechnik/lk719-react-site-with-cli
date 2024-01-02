@@ -12,10 +12,13 @@ export const capitalizeFirstLetter = (text: string) => {
 	return text[0].toUpperCase() + text.slice(1);
 };
 
-/**
- * Creates a file with content
- *
- * qfil.createFile('src/data/infos.json', '[]');
- *
- * (file is created)
- */
+export const readContentOfFile = (pathAndFileName: string) => {
+	return fs.readFileSync(pathAndFileName, { encoding: "utf8", flag: "r" });
+};
+
+export const convertStringBlockToLines = (content: string) => {
+	return content.split("\n");
+};
+export const convertLinestoStringBlock = (lines: string[]) => {
+	return lines.join("\n");
+};
