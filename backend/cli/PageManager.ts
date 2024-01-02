@@ -22,22 +22,38 @@ export class PageManager {
 	}
 
 	public createPage() {
+		this.createPageFile();
+		this.addBlockToNavFile();
+		this.addBlockToMainFile();
+	}
+
+	private createPageFile() {
 		tools.createFile(
 			this.pathAndFileName,
 			`
-export const Page${this.pageIdCode} = () => {
-	return (
-		<p>This is the ${this.pageIdCode} page.</p>
-	)
-}
+	export const Page${this.pageIdCode} = () => {
+		return (
+			<p>This is the ${this.pageIdCode} page.</p>
+		)
+	}
 `
 		);
 	}
+
+	private addBlockToMainFile() {
+		const dynamicFile = new DynamicFile("src/components/Main.tsx");
+		dynamicFile.addStringBlockBeforeMarker(
+			`MARKER::END_IMPORT_BLOCK`,
+			`import { Page${this.idCode} } from './pages/Page${this.idCode}.tsx';`
+		);
+		dynamicFile.save();
+	}
+
 	private addBlockToNavFile() {
 		const dynamicFile = new DynamicFile("src/components/Nav.tsx");
 		dynamicFile.addStringBlockBeforeMarker(
 			`</ul>`,
-			`'\t\t\t<li><NavLink to="/${this.idCode}">${this.idCode}</NavLink></li>`
+			`\t\t\t\t<li>\n\t\t\t\t\t<NavLink to="/${this.idCode}">${this.idCode}</NavLink>\n\t\t\t\t</li>`
 		);
 		dynamicFile.save();
 	}

@@ -17,6 +17,7 @@ export class DynamicFile {
 			if (line.includes(marker)) {
 				newLines.push(stringBlock);
 			}
+			newLines.push(line);
 		}
 		this.lines = newLines;
 	}
