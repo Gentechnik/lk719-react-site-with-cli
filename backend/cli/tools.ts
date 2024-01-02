@@ -8,6 +8,10 @@ export const createFile = (pathAndFileName: string, content: string) => {
 	fs.writeFileSync(pathAndFileName, content.trim());
 };
 
+export const capitalizeFirstLetter = (text: string) => {
+	return text[0].toUpperCase() + text.slice(1);
+};
+
 /**
  * Creates a file with content
  *
