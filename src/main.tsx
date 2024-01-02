@@ -11,6 +11,7 @@ import { PageInfo } from "./pages/PageInfo.tsx";
 import { PageAbout } from "./pages/PageAbout.tsx";
 import { Page404 } from "./pages/Page404.tsx";
 import { PageReports } from "./pages/PageReports.tsx";
+// MARKER::END_IMPORT_BLOCK
 
 const router = createBrowserRouter([
 	{
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
 				element: <PageReports />,
 			},
 			{
+				// MARKER::END_PAGE_ROUTES
 				path: "/",
 				element: <Navigate to="/welcome" replace />,
 			},
